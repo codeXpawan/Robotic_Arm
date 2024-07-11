@@ -55,13 +55,17 @@
             <geometry>
                 <cylinder radius="${L1_arm_radius}" length="${L1_arm_length}"/>
             </geometry>
+            <origin xyz="0.0 0.0 ${L1_arm_length/2}" rpy="0.0 0.0 0.0"/>
+            
         </visual>
     </link>
-    <joint name="base_stepper_to_L1_joint" type="continuous">
+    <joint name="base_stepper_to_L1_joint" type="revolute">
         <parent link="base_stepper_link"/>
         <child link="L1_link"/>
-        <origin xyz="0.05 0.0 ${L1_arm_length/2 + L1_arm_radius}" rpy="0.0 0.0 0.0"/>
+        <origin xyz="0.05 0.0 0.0" rpy="0.0 0.0 0.0"/>
         <axis xyz="1.0 0.0 0.0"/>
+        <limit lower="-1.57" upper="1.57" effort="9.8" velocity="2.0"/>
+        
     </joint>
     <link name="upper_stepper_link">
         <visual>
@@ -73,21 +77,22 @@
     <joint name="joint_name" type="fixed">
         <parent link="L1_link"/>
         <child link="upper_stepper_link"/>
-        <origin xyz="0.0 0.0 ${L1_arm_length/2 + stepper_box_height/2}" rpy="0.0 0.0 0.0"/>
+        <origin xyz="0.0 0.0 ${L1_arm_length + stepper_box_height/2}" rpy="0.0 0.0 0.0"/>
     </joint>
     <link name="L2_link">
         <visual>
             <geometry>
                 <cylinder radius="${L2_arm_radius}" length="${L2_arm_length}"/>
             </geometry>
+            <origin xyz="0.0 0.0 ${L2_arm_length/2}" rpy="0.0 0.0 0.0"/>
+            
         </visual>
     </link>
     <joint name="upper_stepper_to_L2_joint" type="continuous">
         <parent link="upper_stepper_link"/>
         <child link="L2_link"/>
-        <origin xyz="${stepper_box_length/2 + L2_arm_radius} 0.0 ${L2_arm_length/2}" rpy="0.0 0.0 0.0"/>
+        <origin xyz="${stepper_box_length/2 + L2_arm_radius} 0.0 0.0" rpy="0.0 0.0 0.0"/>
         <axis xyz="1.0 0.0 0.0"/>
-        
     </joint>
 
 </robot>
